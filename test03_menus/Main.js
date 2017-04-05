@@ -20,7 +20,7 @@ function draw()
   {
     elements[i].update();
     elements[i].show();
-  }  
+  }
 }
 
 function Button(input_name, input_x, input_y, input_length, input_height, input_text, input_clickFunction)
@@ -38,7 +38,18 @@ function Button(input_name, input_x, input_y, input_length, input_height, input_
   {
     if (mouseX > this.pos.x && mouseX < this.pos.x + this.l && mouseY > this.pos.y && mouseY < this.pos.y + this.h)
     {
-      this.mouseover = true;
+      var anyElementSelected = 0;
+      for (var i = elements.length - 1; i >= 0; i--) 
+      {
+        if ( elements[i].mouseover ) 
+        {
+          anyElementSelected++;
+        }
+      }
+      if (anyElementSelected < 1)
+      {
+        this.mouseover = true;
+      }
     }      
     else 
     {
