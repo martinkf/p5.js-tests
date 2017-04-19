@@ -1,6 +1,5 @@
 var elements = [];
-var testString;
-var bowlie;
+var frameRateCounter = 1;
 
 function setup()
 {   
@@ -10,10 +9,10 @@ function setup()
   elements.push(new Button
     (
       "buttonA", 
-      4, 
-      height - (height / 6) - 4, 
-      (width / 2) - 8, 
-      height / 6, 
+      4,
+      height / 2 - 8, 
+      width / 2 - 8, 
+      height / 4, 
       "Botão A", 
       "testA"
     )
@@ -21,21 +20,75 @@ function setup()
   elements.push(new Button
     (
       "buttonB",
-      width / 2 + 4, 
-      height - (height / 6) - 4, 
-      (width / 2) - 8, 
-      height / 6, 
+      width / 2,
+      height / 2 - 8, 
+      width / 2 - 8,
+      height / 4, 
       "Botão B", 
       "testB"
     )
   );
-  bowlie = new Ball(width/2, height/2, 50);
-  elements.push(bowlie);
+  elements.push(new Button
+    (
+      "buttonC",
+      4,
+      height / 2 + height / 4 - 4, 
+      width / 2 - 8,
+      height / 4, 
+      "Botão C", 
+      "testC"
+    )
+  );
+  elements.push(new Button
+    (
+      "buttonD",
+      width / 2,
+      height / 2 + height / 4 - 4, 
+      width / 2 - 8,
+      height / 4, 
+      "Botão D", 
+      "testD"
+    )
+  );
+
+
+  elements.push(new Textbox
+    (
+      "textboxA",
+      100,
+      100,
+      16,
+      1,
+      60
+    )
+  );
+  elements.push(new Textbox
+    (
+      "textboxB",
+      200,
+      100,
+      32,
+      100,
+      0
+    )
+  );
+  elements.push(new Textbox
+    (
+      "textboxC",
+      270,
+      100,
+      32,
+      100,
+      0
+    )
+  );
 }
 
 function draw()
 {  
   background(128);
+
+  //frameRateCounter++;
 
   for (var i =  elements.length - 1; i >= 0; i--) 
   {
@@ -103,42 +156,39 @@ function Button(input_name, input_x, input_y, input_length, input_height, input_
   }
 }
 
-function Ball(input_x, input_y, input_radius)
+function Textbox(input_name, input_x, input_y, input_size, input_refresh, input_reset)
 {
-  this.x = input_x;
-  this.y = input_y;
-  this.r = input_radius;
-  this.force = 0;
+  this.nam = input_name;
+  this.pos = createVector(input_x, input_y);
+  this.siz = input_size;
+  this.refresh = input_refresh;
+  this.reset = input_reset;
 
-  this.receiveForce = function(input_force)
-  {
-    this.force = input_force;
-  }
+  this.txt = 1;
+  //this.txt = frameRateCounter;
 
   this.update = function()
-  {
-    if (this.force > 0)
+  {    
+    if (frameCount % this.refresh == 0)
+    {   
+      this.txt++;
+    }
+
+    if (input_reset != 0)
     {
-      if (this.force != 0)
+      if (this.txt > input_reset)
       {
-        this.x += 4;
-        this.force--;
+        this.txt = 1;
       }
     }
-    else //meaning: this.force < 0
-    {
-      if (this.force != 0)
-      {
-        this.x -= 4;
-        this.force++;
-      }
-    }    
+    //this.txt = frameRateCounter;
   }
 
   this.show = function()
-  {
-    fill(255);  
-    ellipse(this.x,this.y,this.r);
+  {    
+    textSize(this.siz);
+    fill(255);    
+    text(this.txt, this.pos.x, this.pos.y);
   }
 }
 
@@ -151,14 +201,4 @@ function mousePressed()
       elements[i].clicked = true;
     }
   }
-}
-
-function testA()
-{  
-  bowlie.receiveForce(-10);
-}
-
-function testB()
-{
-  bowlie.receiveForce(10);
 }
