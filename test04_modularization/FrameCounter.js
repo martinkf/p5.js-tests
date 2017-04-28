@@ -1,10 +1,11 @@
 function FrameCounter(input_x, input_y, input_refresh, input_reset)
 {
+  this.type = "FrameCounter";
   this.pos = createVector(input_x, input_y);
   this.refresh = input_refresh;
   this.reset = input_reset;
 
-  this.txt = 1;
+  this.txt = 0;
   //this.txt = frameRateCounter;
 
   this.update = function()

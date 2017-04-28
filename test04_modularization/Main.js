@@ -1,17 +1,16 @@
+//global variables
+var elements = [];
+var internalClock = 0;
 
-var elements_static = [];
-var elements_dynamic = [];
-var elements_buttons = [];
-//var frameRateCounter = 1;
-
+// setup p5 method
 function setup()
-{   
+{
+  // general setup
   createCanvas(480, 640);
-  frameRate(60);   
+  frameRate(20);   
 
-  background(128);
-
-  elements_buttons.push(new Button
+  // inclusão dos elementos
+  elements.push(new Button
     (
       "buttonA", 
       4,
@@ -22,7 +21,7 @@ function setup()
       "testA"
     )
   );  
-  elements_buttons.push(new Button
+  elements.push(new Button
     (
       "buttonB",
       width / 2,
@@ -33,7 +32,7 @@ function setup()
       "testA"
     )
   );
-  elements_buttons.push(new Button
+  elements.push(new Button
     (
       "buttonC",
       4,
@@ -44,7 +43,7 @@ function setup()
       "testA"
     )
   );
-  elements_buttons.push(new Button
+  elements.push(new Button
     (
       "buttonD",
       width / 2,
@@ -56,48 +55,49 @@ function setup()
     )
   );
 
-  elements_static.push(new Player(20,40));
-  
-  for (var i =  elements_static.length - 1; i >= 0; i--) 
-  {    
-    elements_static[i].show();
-  }
+  elements.push(new Player(20,40));  
 
-  elements_dynamic.push(new FrameCounter(400,100,30,60));
+  elements.push(new FrameCounter(400,100,1,60));
 }
 
+// draw p5 method
 function draw()
-{  
-  //background(128);
+{
+  // general setup
+  background(128);
 
-  //frameRateCounter++;
-  //console.log(frameRate());
+  // tick the internal clock
+  if (internalClock < 180) internalClock++;
+  else internalClock = 1;
 
-  for (var i =  elements_buttons.length - 1; i >= 0; i--) 
+  // draw the elements
+  for (var i =  elements.length - 1; i >= 0; i--) 
   {
-    elements_buttons[i].update();
-    elements_buttons[i].show();
+    elements[i].update();
+    elements[i].show();
   }
 
-  for (var i = elements_dynamic.length - 1; i >= 0; i--) 
-  {
-    elements_dynamic[i].update();
-    elements_dynamic[i].show();
-  }
+  // debug: draw the internal clock
+  text(internalClock, 300, 100);
 }
 
+// handling actions
 function mousePressed()
 {
-  for (var i =  elements_buttons.length - 1; i >= 0; i--) 
-  {
-    if (elements_buttons[i].mouseover)
-    {      
-      elements_buttons[i].clicked = true;
+  for (var i =  elements.length - 1; i >= 0; i--) 
+  {    
+    if (elements[i].type == "Button")
+    {
+      if (elements[i].mouseover)
+      {      
+        elements[i].clicked = true;
+      }
     }
   }
 }
 
+// personal general methods
 function testA()
 {
-  //console.log("oi");
+  console.log("oi");
 }

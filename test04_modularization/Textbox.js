@@ -1,6 +1,7 @@
 function Textbox(input_name, input_x, input_y, input_txt, input_colour, input_size)
 {
   this.nam = input_name;
+  this.type = "Textbox";
   this.pos = createVector(input_x, input_y);
   this.txt = input_txt;
   this.colour = input_colour;

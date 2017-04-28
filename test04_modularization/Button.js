@@ -1,6 +1,7 @@
 function Button(input_name, input_x, input_y, input_length, input_height, input_text, input_clickFunction)
 {
   this.nam = input_name;
+  this.type = "Button";
   this.pos = createVector(input_x, input_y);
   this.l = input_length;
   this.h = input_height;
@@ -14,18 +15,23 @@ function Button(input_name, input_x, input_y, input_length, input_height, input_
     if (mouseX > this.pos.x && mouseX < this.pos.x + this.l && mouseY > this.pos.y && mouseY < this.pos.y + this.h)
     {
       var anyElementSelected = 0;
-      for (var i = elements_buttons.length - 1; i >= 0; i--) 
+
+      for (var i = elements.length - 1; i >= 0; i--) 
       {
-        if ( elements_buttons[i].mouseover ) 
+        if (elements[i].type == "Button")
         {
-          anyElementSelected++;
+          if ( elements[i].mouseover ) 
+          {
+            anyElementSelected++;
+          }
         }
       }
+
       if (anyElementSelected < 1)
       {
         this.mouseover = true;
       }
-    }      
+    }
     else 
     {
       this.mouseover = false;
