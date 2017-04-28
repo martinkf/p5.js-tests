@@ -1,5 +1,7 @@
 function Player(input_x, input_y)
 {
+  // atributos
+  this.type = "Player";
   this.pos = createVector(input_x, input_y);
 
   this.attSpd = 100;
@@ -17,40 +19,10 @@ function Player(input_x, input_y)
 
   this.curHp = this.defHp;
 
-  this.healByAmount = function(input_amountToHeal)
-  {
-    if (this.curHp + input_amountToHeal > this.defHp)
-    {
-      this.curHp = this.defHp;
-    }
-    else 
-    {
-      this.curHp += input_amountToHeal;
-    }
-  }
-
-  this.sufferByAmount = function(input_amountToSuffer)
-  {
-    if (this.curHp - input_amountToSuffer <= 0)
-    {
-      this.curHp = 0;
-      this.die();
-    }
-    else 
-    {
-      this.curHp -= input_amountToSuffer;
-    }
-  }
-
-  this.die = function()
-  {
-    //deadzzzz
-  }
-
-
+  // p5 methods
   this.update = function()
   {    
-    //
+    // nothing I guess? yet?
   }
 
   this.show = function()
@@ -259,4 +231,36 @@ function Player(input_x, input_y)
       subelements[i].show();      
     };
   }
+
+  // meus métodos
+  this.healByAmount = function(input_amountToHeal)
+  {
+    if (this.curHp + input_amountToHeal > this.defHp)
+    {
+      this.curHp = this.defHp;
+    }
+    else 
+    {
+      this.curHp += input_amountToHeal;
+    }
+  }
+
+  this.sufferByAmount = function(input_amountToSuffer)
+  {
+    if (this.curHp - input_amountToSuffer <= 0)
+    {
+      this.curHp = 0;
+      this.die();
+    }
+    else 
+    {
+      this.curHp -= input_amountToSuffer;
+    }
+  }
+
+  this.die = function()
+  {
+    //deadzzzz
+  }
+
 }
