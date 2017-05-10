@@ -2,7 +2,7 @@
 var elements = [];
 var internalClock = 0;
 
-// setup p5 method
+	// setup p5 method
 function setup()
 {
   // general setup
