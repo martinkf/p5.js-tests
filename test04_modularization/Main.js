@@ -1,4 +1,4 @@
-//global variables
+﻿// global variables
 var elements = [];
 var internalClock = 0;
 
